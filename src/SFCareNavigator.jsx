@@ -121,10 +121,6 @@ async function callClaude(messages, insCtx) {
   return data.choices?.[0]?.message?.content || "";
 }
 
-function isRateLimitError(msg) {
-  return msg && (msg.includes("exceeded_limit") || msg.includes("rate_limit") || msg.includes("529") || msg.includes("overload") || msg.includes("5h"));
-}
-
 function isOpenNow(clinic) {
   const now = new Date();
   const day = now.getDay();

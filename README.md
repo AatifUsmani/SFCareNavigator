@@ -1,16 +1,51 @@
-# React + Vite
+# SF Care Navigator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multilingual healthcare navigator for San Francisco residents. Uses OpenAI's GPT-4 to provide personalized routing to appropriate care facilities based on neighborhood, insurance status, and healthcare needs.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Local Development
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Environment Variables
 
-## Expanding the ESLint configuration
+Create a `.env` file in the root directory:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```env
+VITE_OPENAI_API_KEY=sk-your-actual-api-key-here
+```
+
+Get your API key from [platform.openai.com/api/keys](https://platform.openai.com/api/keys)
+
+### Vercel Deployment
+
+1. Push to GitHub
+2. Import project in Vercel dashboard
+3. **Add environment variable:**
+   - Name: `VITE_OPENAI_API_KEY`
+   - Value: Your OpenAI API key (keep it secret)
+4. Vercel will automatically detect Vite and build with `npm run build`
+
+The app will be live at your Vercel URL.
+
+## Features
+
+- **8 Languages**: English, Spanish, Mandarin, Cantonese, Tagalog, Vietnamese, Russian, Arabic
+- **Multilingual AI**: Responds in the language user writes in
+- **Instant Clinic Routing**: Finds nearest clinics by neighborhood
+- **Insurance Guidance**: Explains Healthy SF, Emergency Medi-Cal, Covered CA options
+- **Mobile-Friendly**: Works on phones and tablets
+- **Voice Input**: Speech recognition support
+- **Anonymous**: No data collection
+
+## Built With
+
+- React 19
+- Vite
+- OpenAI API (GPT-4)
+- CSS-in-JS styling
+
