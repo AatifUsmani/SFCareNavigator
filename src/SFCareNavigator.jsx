@@ -104,8 +104,8 @@ STYLE: Greeting → ask what's happening → max 2 follow-up questions → speci
 }
 
 async function callClaude(messages, insCtx) {
-  const apiKey = import.meta.env.VITE_OPENAI_API_KEY || localStorage.getItem('openai_key');
-  if (!apiKey) throw new Error("OpenAI API key not found. Set VITE_OPENAI_API_KEY in .env file or use localStorage.setItem('openai_key', 'your-key')");
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  if (!apiKey) throw new Error("VITE_OPENAI_API_KEY environment variable is not set. Vercel: add it to Project Settings > Environment Variables");
   const systemMsg = { role: "system", content: buildPrompt(insCtx) };
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method:"POST",
