@@ -150,10 +150,18 @@ function isRateLimit(e) {
 
 // ── API ────────────────────────────────────────────────────────────────────
 async function callClaude(messages, insCtx) {
+  // support either VITE_ prefix or plain key in case the environment
+  // variable was misnamed in Vercel settings.  Return a message instead
+  // of throwing so the app still deploys if the key is missing.
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY || import.meta.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    console.warn("OpenAI API key not configured; returning warning text.");
+    return "⚠️ OpenAI API key not found. Set VITE_OPENAI_API_KEY in your Vercel environment variables.";
+  }
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method:"POST",
     headers:{"Content-Type":"application/json",
-        "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+        "Authorization": `Bearer ${apiKey}`
     },
     body:JSON.stringify({ model:"gpt-4o-mini", max_tokens:200, messages:[{role:"system", content:buildPrompt(insCtx)}, ...messages] }),
   });
